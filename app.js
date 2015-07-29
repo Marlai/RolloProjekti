@@ -1,5 +1,6 @@
 var express = require('express');
 var bodyParser = require('body-parser')
+var db = require('./database');
 var app = express();
 
 //called for every request
@@ -15,8 +16,8 @@ app.use('/', express.static('public'));
 app.use(bodyParser());
 
 app.post('/contact',function(req,res){
-   console.log(req.body.user_name);
-   res.send("Your data is saved");
+   console.log(req.body);
+   db.addPersonInfo(res,req.body);
 });
 
 app.listen(3000);
